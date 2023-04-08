@@ -1,6 +1,6 @@
 # flavora
 
-A django / react web app that allows users generate custom food recipes based on the their food preferences, ingredients, and ideal cooking time.
+A django / react web app that allows users generate custom food recipes based on the their food preferences, ingredients, and cooking time.
 
 ## Goals
 
