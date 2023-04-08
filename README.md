@@ -13,11 +13,10 @@ A django / react web app that allows users generate custom food recipes based on
 ## APIs
 
 - OpenAI API (Generate recipes and *maybe* images of said recipe)
-- fooddb API (All ingredients will come from this API that will return JSON containing ingredient info so that users cannot enter nonsensical ingredients)
+- fooddb API (All ingredient info will come from this API)
 
 ## Challenges / Considerations
 
 - Priming the language model (gpt-3.5-turbo or text-davinci-003) to get compelling outputs and reduce token count.
   - Fine tune the model.
- - Completely ignoring the problem of ingredient "quantity" for now. Too many different standard units of measurement between foods. ChatGPT will assume the user has enough of whatever ingredients they input to complete the recipe.
  - Storing ingredients in either postgres or JSON file. 
