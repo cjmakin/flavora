@@ -4,7 +4,7 @@ A django / react web app that allows users generate custom food recipes based on
 the their food preferences, ingredients, and cooking time.
 
 <!-- ![img](images/recipe_images/recipe_1_realistic_512_2.png) ![img](images/recipe_images/recipe_6_realistic_512.png){with=200} -->
-<img src="images/recipe_images/recipe_1_realistic_512_2.png" width=30%> <img src="images/recipe_images/recipe_6_realistic_512.png" width=30%>
+<img src="images/recipe_images/recipe_1_realistic_512_2.png" width=30%> <img src="images/recipe_images/recipe_6_realistic_512.png" width=30%><img src="images/recipe_images/recipe_7_realistic_512.png" width=30%>
 
 ## Goals
 
