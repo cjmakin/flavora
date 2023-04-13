@@ -3,6 +3,8 @@
 A django / react web app that allows users generate custom food recipes based on
 the their food preferences, ingredients, and cooking time.
 
+![img](images/recipe_images/recipe_1_realistic_512_2.png) ![img](images/recipe_images/recipe_6_realistic_512.png)
+
 ## Goals
 
 - Build a web app that allows users to generate declicious and maybe

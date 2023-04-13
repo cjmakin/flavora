@@ -1,75 +1,75 @@
 [
     {
         "name": "Spaghetti Carbonara",
+        "cooking_time": "30 minutes",
         "description": "Classic Italian pasta dish with eggs, bacon, and parmesan cheese",
         "instructions": "1. Cook spaghetti according to package instructions. \n2. In a large skillet, cook bacon until crispy. Remove from skillet and crumble. \n3. In a bowl, whisk together eggs, parmesan cheese, salt, and pepper. \n4. Drain spaghetti, reserving some of the pasta water. \n5. Add spaghetti to skillet with bacon and toss to combine. \n6. Remove skillet from heat and add egg mixture, stirring quickly to coat spaghetti. Add reserved pasta water as needed to create a creamy sauce. \n7. Serve immediately with extra parmesan cheese and black pepper on top.",
         "img_path": "",
         "created_at": "2022-01-01T12:00:00Z",
-        "updated_at": "2022-01-01T12:00:00Z",
-        "cooking_time": "30 minutes"
+        "updated_at": "2022-01-01T12:00:00Z"
     },
     {
         "name": "Beef Stew",
+        "cooking_time": "2 hours",
         "description": "Hearty stew with beef, carrots, potatoes, and onions",
         "instructions": "1. In a large pot, heat oil over medium heat. \n2. Add beef and brown on all sides. Remove from pot and set aside. \n3. Add onions, carrots, and potatoes to pot and cook until onions are soft. \n4. Add beef back to pot and cover with beef broth. \n5. Bring to a boil, then reduce heat and simmer for 1-2 hours until beef is tender. \n6. Serve hot with bread or biscuits.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "2 hours"
+        "updated_at": "2022-01-02T12:00:00Z"
     },
     {
         "name": "Chicken Alfredo",
+        "cooking_time": "45 minutes",
         "description": "Creamy pasta dish with chicken and parmesan cheese",
         "instructions": "1. Cook pasta according to package instructions. \n2. In a large skillet, cook chicken over medium heat until no longer pink. \n3. Add garlic and cook for 1-2 minutes until fragrant. \n4. Add heavy cream and parmesan cheese to skillet and stir to combine. \n5. Drain pasta and add to skillet with sauce. Toss to combine. \n6. Serve hot with extra parmesan cheese and black pepper on top.",
         "img_path": "",
         "created_at": "2022-01-03T12:00:00Z",
-        "updated_at": "2022-01-03T12:00:00Z",
-        "cooking_time": "45 minutes"
+        "updated_at": "2022-01-03T12:00:00Z"
     },
     {
         "name": "Pasta with Tomato Sauce",
+        "cooking_time": "2 hours",
         "description": "A classic pasta dish with a homemade tomato sauce.",
         "instructions": "1. Cook the pasta in a large pot of boiling salted water until al dente. Drain and set aside.\\n2. Heat the olive oil in a large saucepan over medium heat. Add the onion and garlic and cook until soft and fragrant, about 5 minutes.\\n3. Add the tomatoes, salt, and sugar and bring to a simmer. Cook for 15-20 minutes, stirring occasionally, until the sauce has thickened.\\n4. Add the cooked pasta to the sauce and toss to combine. Serve hot, topped with grated Parmesan cheese if desired.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "2 hours"
+        "updated_at": "2022-01-02T12:00:00Z"
     },
     {
         "name": "Roast Chicken with Vegetables",
+        "cooking_time": "2 hours 30 minutes",
         "description": "A hearty and flavorful meal of roasted chicken and vegetables.",
         "instructions": "1. Preheat the oven to 400°F.\\n2. Season the chicken with salt and pepper and place in a large roasting pan.\\n3. Toss the vegetables with olive oil, salt, and pepper and scatter around the chicken in the roasting pan.\\n4. Roast for 1 hour or until the chicken is cooked through and the vegetables are tender.\\n5. Serve hot, with the pan juices spooned over the chicken and vegetables.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "2 hours 30 minutes"
+        "updated_at": "2022-01-02T12:00:00Z"
     },
     {
         "name": "Spicy Shrimp Tacos",
+        "cooking_time": "1 hour 30 minutes",
         "description": "A delicious and spicy seafood taco recipe.",
         "instructions": "1. Season the shrimp with chili powder, cumin, salt, and pepper.\\n2. Heat the oil in a large skillet over medium-high heat. Add the shrimp and cook until pink and cooked through, about 2-3 minutes per side.\\n3. Warm the tortillas in a dry skillet over medium heat.\\n4. Assemble the tacos by filling each tortilla with shrimp, lettuce, avocado, cilantro, and lime juice. Serve hot.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "1 hour 30 minutes"
+        "updated_at": "2022-01-02T12:00:00Z"
     },
     {
         "name": "Mushroom Risotto",
+        "cooking_time": "1 hour 50 minutes",
         "description": "A creamy and savory rice dish made with mushrooms and Parmesan cheese.",
         "instructions": "1. Heat the broth in a saucepan and keep warm over low heat.\\n2. Heat the olive oil in a large saucepan over medium heat. Add the onions and cook until soft, about 5 minutes.\\n3. Add the rice and cook, stirring constantly, for 1-2 minutes.\\n4. Add the wine and stir until the liquid is absorbed.\\n5. Add the mushrooms and cook until they release their liquid and begin to brown, about 5-7 minutes.\\n6. Add the warm broth to the rice mixture, 1 cup at a time, stirring constantly and allowing each cup to be absorbed before adding the next.\\n7. Cook until the rice is tender and creamy, about 20-25 minutes.\\n8. Stir in the Parmesan cheese and season with salt and pepper to taste. Serve hot.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "1 hour 50 minutes"
+        "updated_at": "2022-01-02T12:00:00Z"
     },
     {
         "name": "Beef Stir-Fry",
+        "cooking_time": "40 minutes",
         "description": "A quick and easy stir-fry recipe made with beef, vegetables, and a flavorful sauce.",
         "instructions": "1. Heat the oil in a large skillet over high heat.\\n2. Add the beef and cook until browned, about 2-3 minutes per side.\\n3. Remove the beef from the skillet and set aside.\\n4. Add the vegetables to the skillet and cook until tender, about 3-4 minutes.\\n5. In a small bowl, whisk together the soy sauce, hoisin sauce, honey, and cornstarch.\\n6. Add the beef back to the skillet and pour the sauce over the beef and vegetables.\\n7. Cook until the sauce thickens and coats the beef and vegetables, about 1-2 minutes.\\n8. Serve hot, over rice if desired.",
         "img_path": "",
         "created_at": "2022-01-02T12:00:00Z",
-        "updated_at": "2022-01-02T12:00:00Z",
-        "cooking_time": "40 minutes"
+        "updated_at": "2022-01-02T12:00:00Z"
     }  
 ]
   

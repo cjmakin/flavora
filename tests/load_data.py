@@ -13,7 +13,6 @@ def load_data(file_name, insert_query):
     with open(f"{path}/{file_name}") as f:
         data = json.load(f)
 
-    # Convert the list of dictionaries to a list of tuples, with each tuple representing a row to be inserted
     rows = [tuple(d.values()) for d in data]
 
     # Use execute_values() to insert the rows into the ingredients table
@@ -22,14 +21,13 @@ def load_data(file_name, insert_query):
         cursor, f"{insert_query} %s", rows)
     conn.commit()
 
-    # Close the database connection
     conn.close()
 
 
 ingredients_insert = "INSERT INTO ingredients (name, name_scientific, description, wikipedia_id, food_group, food_subgroup) VALUES "
-recipes_insert = "INSERT INTO recipes (name, description, instructions, user_id) VALUES "
+recipes_insert = "INSERT INTO recipes (name, cooking_time, description, instructions, img_path, created_at, updated_at) VALUES "
 users_insert = "INSERT INTO users (username, email, password_hash, first_name, last_name, food_preferences) VALUES "
 
-# load_data("cleaned_ingredients.json", ingredients_insert)
-# load_data("sample_user.json", users_insert)
-load_data("sample_recipe.json", recipes_insert)
+# load_data("ingredients.json", ingredients_insert)
+load_data("sample_user.json", users_insert)
+# load_data("sample_recipe.json", recipes_insert)

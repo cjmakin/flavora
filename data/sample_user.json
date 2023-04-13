@@ -1,7 +1,6 @@
 [
     
     {
-      "id": 1,
       "username": "john123",
       "email": "john123@gmail.com",
       "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
@@ -10,7 +9,6 @@
       "food_preferences": ["vegetarian", "gluten-free"]
     },
     {
-      "id": 2,
       "username": "jane456",
       "email": "jane456@gmail.com",
       "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
@@ -19,7 +17,6 @@
       "food_preferences": ["vegan", "dairy-free"]
     },
     {
-      "id": 3,
       "username": "bob789",
       "email": "bob789@gmail.com",
       "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
