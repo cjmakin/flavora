@@ -1,11 +1,14 @@
 import psycopg2
-import requests
+import psycopg2.extensions
 import openai
 import hashlib
 import os
+import base64
+from PIL import Image
+from io import BytesIO
+from pathlib import Path
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
-print(openai.api_key)
 
 
 def getRecipeDescription(id):
@@ -25,32 +28,62 @@ def getRecipeDescription(id):
         return False
 
 
-def generateImage(id, username):
+def generateImage(recipe_id, username):
     hashed_username = hashlib.sha256(username.encode('utf-8')).hexdigest()
-    recipe_description = getRecipeDescription(id)
+    recipe_description = getRecipeDescription(recipe_id)
 
-    print(f'User: {hashed_username}, Recipe description: {recipe_description}')
-
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {openai.api_key}'
-    }
-
-    data = {
-        'model': 'image-alpha-001',
-        'prompt': f'realistic image, no text, of: {recipe_description}',
-        'num_images': 1,
-        'size': '512x512',
-        'user': hashed_username
-    }
+    # Request arguments
+    prompt = f'realistic image, no text, of: {recipe_description}'
+    size = '512x512'
+    n = 1
+    response_format = 'b64_json'
 
     try:
-        response = requests.post(
-            'https://api.openai.com/v1/images/generations', headers=headers, json=data)
-        image_url = response.json()['data'][0]['url']
-        return image_url
+        response = openai.Image.create(
+            prompt=prompt, n=n, size=size, user=hashed_username, response_format=response_format)
+        data = response['data'][0]["b64_json"]
+
+        return data
+
     except Exception as e:
         print(e)
 
 
-print(generateImage(7, 'cjmakin'))
+def saveImage(data, recipe_id):
+    file_path = f'{Path().resolve()}/images/recipe_images/{recipe_id}.jpg'
+
+    binary_data = base64.b64decode(data)
+
+    try:
+        image = Image.open(BytesIO(binary_data))
+        image.save(file_path, "JPEG")
+        saved = True
+    except Exception as e:
+        saved = False
+        print(e)
+
+    # Save filepath to DB
+    if saved:
+        try:
+            file_path_escaped = psycopg2.extensions.QuotedString(
+                file_path).getquoted().decode()
+
+            connection = psycopg2.connect(database='flavora_test')
+            cursor = connection.cursor()
+
+            query = f'UPDATE recipes SET img_path = {file_path_escaped} WHERE id = {recipe_id};'
+            cursor.execute(query)
+
+            connection.commit()
+            cursor.close()
+            connection.close()
+
+            print(
+                f'SUCCESS: Image of recipe_id={recipe_id} saved at {file_path}')
+
+        except Exception as e:
+            print(e)
+
+
+data = generateImage(1, 'terra_liu')
+saveImage(data, 1)
