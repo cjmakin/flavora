@@ -5,8 +5,7 @@ the their food preferences, ingredients, and cooking time.
 
 <!-- ![img](images/recipe_images/recipe_1_realistic_512_2.png) ![img](images/recipe_images/recipe_6_realistic_512.png){with=200} -->
 
-<img src="images/recipe_images/8.jpg" width=30%>
-<img src="images/recipe_images/6.jpg" width=30%><img src="images/recipe_images/7.jpg" width=30%>
+<img src="images/recipe_images/8.jpg" width=30%><img src="images/recipe_images/6.jpg" width=30%><img src="images/recipe_images/7.jpg" width=30%>
 
 ## Goals
 
