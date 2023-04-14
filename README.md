@@ -13,7 +13,7 @@ the their food preferences, ingredients, and cooking time.
 - Allow users to choose from a list of ingredients (900+) and save them to their
   "pantry". All items in a user's pantry will be passed into the ChatGPT API
   query, with the option to add additional items.
-- Allow users to save food preferences (i.e. vegitarian, pescatarian, vegan,
+- Allow users to save food preferences (i.g. vegitarian, pescatarian, vegan,
   etc.) which will then be passed into the ChatGPT API query.
 - Allow user's to save all of their generated recipes into their own "Cookbook".
 - _Stretch_ Allow users to generate an image of what their recipe could look
