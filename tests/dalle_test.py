@@ -50,6 +50,7 @@ def generateImage(recipe_id, username):
 
 
 def saveImage(data, recipe_id):
+    # TODO update path when implementing in django
     file_path = f'{Path().resolve()}/images/recipe_images/{recipe_id}.jpg'
 
     binary_data = base64.b64decode(data)
@@ -85,5 +86,6 @@ def saveImage(data, recipe_id):
             print(e)
 
 
-data = generateImage(1, 'terra_liu')
-saveImage(data, 1)
+for i in range(2, 9):
+    data = generateImage(i, 'terra_liu')
+    saveImage(data, i)
