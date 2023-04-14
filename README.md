@@ -35,4 +35,4 @@ the their food preferences, ingredients, and cooking time.
 
 ## Database Schema
 
-![img](images/db_schema.png)
+<img src="images/db_schema_updated.png" width=80%>
