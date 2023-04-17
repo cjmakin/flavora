@@ -88,8 +88,5 @@ def generatePrompt(num_food_groups, num_ingredients, food_preferences="none"):
     ingredients = getRandomIngredients(num_food_groups, num_ingredients)
     cooking_time = COOKING_TIMES[randint(0, len(COOKING_TIMES)-1)]
 
-    prompt = f"ingredients: {', '.join(ingredients)} \nmax cooking time: {cooking_time} \ndietary preferences: {food_preferences}"
-    print(prompt)
-
-
-generatePrompt(6, 1)
+    prompt = f"ingredients: {', '.join(ingredients)}; max cooking time: {cooking_time}; dietary preferences: {food_preferences}"
+    return prompt

@@ -71,8 +71,17 @@ pantry_table_creation_query = """
     );
 """
 
-create_table("users", user_table_creation_query)
-create_table("ingredients", ingredient_table_creation_query)
-create_table("recipes", recipe_table_creation_query)
-create_table("user_recipe", user_recipe_table_creation_query)
-create_table("pantries", pantry_table_creation_query)
+recipe_ingredient_creation_query = """
+    CREATE TABLE recipe_ingredients (
+        recipe_id INTEGER REFERENCES recipes(id),
+        ingredient_id INTEGER REFERENCES ingredients(id),
+        PRIMARY KEY (recipe_id, ingredient_id)
+    );
+"""
+
+# create_table("users", user_table_creation_query)
+# create_table("ingredients", ingredient_table_creation_query)
+# create_table("recipes", recipe_table_creation_query)
+# create_table("user_recipe", user_recipe_table_creation_query)
+# create_table("pantries", pantry_table_creation_query)
+create_table("recipe_ingredient", recipe_ingredient_creation_query)
