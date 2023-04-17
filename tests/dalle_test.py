@@ -33,7 +33,7 @@ def generateImage(recipe_id, username):
     recipe_description = getRecipeDescription(recipe_id)
 
     # Request arguments
-    prompt = f'realistic image, no text, of: {recipe_description}'
+    prompt = f'delicious image, no text, of: {recipe_description}'
     size = '512x512'
     n = 1
     response_format = 'b64_json'
@@ -85,7 +85,9 @@ def saveImage(data, recipe_id):
         except Exception as e:
             print(e)
 
+data = generateImage(1, 'cjmakin')
+saveImage(data, 1)
 
-for i in range(2, 9):
-    data = generateImage(i, 'terra_liu')
-    saveImage(data, i)
+# for i in range(2, 9):
+#     data = generateImage(i, 'terra_liu')
+#     saveImage(data, i)
