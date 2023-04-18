@@ -17,12 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
-
-
-def send_index(request):
-    index = open('static/index.html')
-    return HttpResponse(index)
-
+from pathlib import Path
+from .views import send_index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
