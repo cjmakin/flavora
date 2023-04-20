@@ -16,8 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+from pathlib import Path
+
+
+def send_index(request):
+    index_path = f"{Path(__file__).resolve().parent.parent}/static/index.html"
+    index = open(index_path)
+    return HttpResponse(index)
+
 
 urlpatterns = [
+    path('', send_index, name='index'),
     path('admin/', admin.site.urls),
-    path('', include('core.urls'))
+    path('api/', include('core.urls'))
 ]
