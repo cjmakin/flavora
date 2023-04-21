@@ -15,12 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.http import HttpResponse
 from pathlib import Path
-from .views import send_index
+
+
+def send_index(request):
+    index_path = f"{Path(__file__).resolve().parent.parent}/static/index.html"
+    index = open(index_path)
+    return HttpResponse(index)
+
 
 urlpatterns = [
+    path('', send_index, name='index'),
     path('admin/', admin.site.urls),
-    path('', send_index, name='index')
+    path('api/', include('core.urls'))
 ]
