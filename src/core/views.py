@@ -43,12 +43,12 @@ def sign_in(request):
     password = request.data.get('password')
 
     user = authenticate(request, email=email, password=password)
-    
 
     if user is not None:
-        user_data = json.loads(serializers.serialize('json', 
-                                                 [user], 
-                                                 fields=['pk', 'username', 'food_preferences', 'first_name', 'last_name']))
+        user_data = json.loads(serializers.serialize('json',
+                                                     [user],
+                                                     fields=['pk', 'username', 'food_preferences', 'first_name', 'last_name']))
+
         user_data[0]['fields']['id'] = user_data[0]['pk']
 
         login(request, user)
