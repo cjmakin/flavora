@@ -2,85 +2,74 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
-import json
+from rest_framework.decorators import api_view, action
+from core.serializers import UserSerializer
 from core.models import *
+import json
+
+#  A viewset that provides default `create()`, `retrieve()`, `update()`,
+# `partial_update()`, `destroy()` and `list()` actions.
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
 
-    #  A viewset that provides default `create()`, `retrieve()`, `update()`,
-    # `partial_update()`, `destroy()` and `list()` actions.
+    @action(detail=False, methods=['POST'])
+    def sign_up(self, request):
 
-    def retrieve(self, request, pk=None):
-        pass
+        serializer = UserSerializer(data=request.data)
 
+        if serializer.is_valid():
 
-@api_view(["POST"])
-def sign_up(request):
+            new_user = User.objects.create_user(
+                username=request.data['email'],
+                email=request.data['email'],
+                password=request.data['password'],
+                first_name=request.data['first_name'],
+                last_name=request.data['last_name'])
 
-    try:
-        new_user = User.objects.create_user(
-            username=request.data['email'],
-            email=request.data['email'],
-            password=request.data['password'],
-            first_name=request.data['first_name'],
-            last_name=request.data['last_name'])
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': serializer.errors})
 
-        print(new_user)
-        return JsonResponse({'success': True})
-    except Exception as e:
-        print(e)
-        return JsonResponse({'success': False})
+    @action(detail=False, methods=['POST'])
+    def sign_in(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
 
+        user = authenticate(request, email=email, password=password)
 
-@api_view(["POST"])
-def sign_in(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
+        if user is not None:
+            serializer = UserSerializer(user)
 
-    user = authenticate(request, email=email, password=password)
+            login(request, user)
+            user_data = serializer.data
+            user_data['id'] = user.pk
 
-    if user is not None:
-        user_data = json.loads(serializers.serialize('json',
-                                                     [user],
-                                                     fields=['pk', 'username', 'food_preferences', 'first_name', 'last_name']))
+            print(serializer.data)
 
-        user_data[0]['fields']['id'] = user_data[0]['pk']
-
-        login(request, user)
-
-        return JsonResponse({'success': True,
-                             'user': user_data[0]['fields']
-                             })
-    else:
-        return JsonResponse({'success': False, 'message': 'Invalid credentials'})
+            return JsonResponse({'success': True,
+                                'user': user_data})
+        else:
+            return JsonResponse({'success': False, 'message': 'Invalid credentials'})
 
 
-@api_view(['POST'])
-def sign_out(request):
+    @action(detail=False, methods=['POST'])
+    def sign_out(self, request):
+        try:
+            logout(request)
+            return JsonResponse({"success": True})
 
-    try:
-        logout(request)
-        return JsonResponse({"success": True})
-
-    except Exception as e:
-        print(e)
-        return JsonResponse({"success": False})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"success": False})
 
 
-@api_view(['GET'])
-def curr_user(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
-    else:
-        user_data = json.loads(serializers.serialize('json',
-                                                     [request.user],
-                                                     fields=['pk', 'username', 'food_preferences', 'first_name', 'last_name']))
-
-        user_data[0]['fields']['id'] = user_data[0]['pk']
-
-        return JsonResponse({'user': user_data[0]['fields']})
+    @action(detail=False, methods=['GET'])
+    def current_user(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+    
+            serializer = UserSerializer(request.user)
+            return JsonResponse({'success': True, 'user': serializer.data})
