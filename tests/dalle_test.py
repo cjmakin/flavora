@@ -85,6 +85,7 @@ def saveImage(data, recipe_id):
         except Exception as e:
             print(e)
 
+
 data = generateImage(1, 'cjmakin')
 saveImage(data, 1)
 

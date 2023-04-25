@@ -45,6 +45,8 @@ class Recipe(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     instructions = models.TextField(null=False, blank=False)
+    ingredients = models.CharField(null=False, blank=False)
+    cooking_time = models.CharField(max_length=50, null=False, blank=False)
     img_path = models.ImageField(upload_to='recipes/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

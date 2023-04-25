@@ -16,13 +16,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if serializer.is_valid():
 
-            User.objects.create_user(
+            user = User.objects.create_user(
                 username=request.data['email'],
                 email=request.data['email'],
                 password=request.data['password'],
                 first_name=request.data['first_name'],
                 last_name=request.data['last_name'])
 
+            user.save()
+            
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'message': serializer.errors})

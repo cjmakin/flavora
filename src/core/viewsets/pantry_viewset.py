@@ -5,7 +5,6 @@ from rest_framework.decorators import action
 from core.models import User, Pantry, Ingredient
 
 
-
 class PantryViewSet(viewsets.ModelViewSet):
     queryset = Pantry.objects.all()
 
@@ -16,13 +15,12 @@ class PantryViewSet(viewsets.ModelViewSet):
         return JsonResponse({'success': True, 'data': serializer.data})
 
     def create(self, request):
-        user_id = request.data.get('user_id')
         ingredient_id = request.data.get('ingredient_id')
 
         try:
-            user = User.objects.get(id=user_id)
+            user = request.user
         except User.DoesNotExist:
-            return JsonResponse({'success': False, 'message': f'User with id {user_id} does not exist.'})
+            return JsonResponse({'success': False, 'message': f'User does not exist.'})
 
         try:
             ingredient = Ingredient.objects.get(id=ingredient_id)
@@ -39,13 +37,12 @@ class PantryViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'])
     def remove_ingredient(self, request):
-        user_id = request.data.get('user_id')
         ingredient_id = request.data.get('ingredient_id')
 
         try:
-            user = User.objects.get(id=user_id)
+            user = request.user
         except User.DoesNotExist:
-            return JsonResponse({'success': False, 'message': f'User with id {user_id} does not exist.'})
+            return JsonResponse({'success': False, 'message': f'User does not exist.'})
 
         try:
             ingredient = Ingredient.objects.get(id=ingredient_id)
