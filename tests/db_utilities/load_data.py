@@ -3,14 +3,13 @@ import psycopg2
 from psycopg2.extras import execute_values
 from pathlib import Path
 
-path = f"{Path().resolve()}/data/"
-
+file_path = f"{Path().resolve()}/data"
 
 def load_data(file_name, insert_query):
 
-    conn = psycopg2.connect(database='flavora_test')
+    conn = psycopg2.connect(database='flavora_db')
 
-    with open(f"{path}/{file_name}") as f:
+    with open(f"{file_path}/{file_name}") as f:
         data = json.load(f)
 
     rows = [tuple(d.values()) for d in data]
@@ -24,10 +23,10 @@ def load_data(file_name, insert_query):
     conn.close()
 
 
-ingredients_insert = "INSERT INTO ingredients (name, name_scientific, description, wikipedia_id, food_group, food_subgroup) VALUES "
+ingredients_insert = "INSERT INTO core_ingredient (name, name_scientific, description, wikipedia_id, food_group, food_subgroup) VALUES "
 recipes_insert = "INSERT INTO recipes (name, cooking_time, description, instructions, img_path, created_at, updated_at) VALUES "
 users_insert = "INSERT INTO users (username, email, password_hash, first_name, last_name, food_preferences) VALUES "
 
-# load_data("ingredients.json", ingredients_insert)
-load_data("sample_user.json", users_insert)
+load_data("ingredients.json", ingredients_insert)
+# load_data("sample_user.json", users_insert)
 # load_data("sample_recipe.json", recipes_insert)

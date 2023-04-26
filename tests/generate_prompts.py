@@ -90,3 +90,6 @@ def generatePrompt(num_food_groups, num_ingredients, food_preferences="none"):
 
     prompt = f"ingredients: {', '.join(ingredients)}; max cooking time: {cooking_time}; dietary preferences: {food_preferences}"
     return prompt
+
+
+print(generatePrompt(2, 3))

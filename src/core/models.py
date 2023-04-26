@@ -28,11 +28,11 @@ class User(AbstractUser):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=255, null=False)
-    name_scientific = models.CharField(max_length=255)
-    description = models.TextField()
-    wikipedia_id = models.URLField(max_length=200)
-    food_group = models.CharField(max_length=50)
-    food_subgroup = models.CharField(max_length=50)
+    name_scientific = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
+    wikipedia_id = models.URLField(max_length=200, null=True)
+    food_group = models.CharField(max_length=50, null=True)
+    food_subgroup = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return f"{self.id}: {self.name}"
@@ -45,6 +45,8 @@ class Recipe(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     instructions = models.TextField(null=False, blank=False)
+    ingredients = models.CharField(null=False, blank=False)
+    cooking_time = models.CharField(max_length=50, null=False, blank=False)
     img_path = models.ImageField(upload_to='recipes/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
