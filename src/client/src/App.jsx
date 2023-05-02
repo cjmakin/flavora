@@ -1,32 +1,29 @@
-import { useState } from "react";
-import flavoraLogo from "./assets/logo.svg";
+import { Outlet } from "react-router-dom";
+import { Header } from "./components/Header.jsx";
+import { createContext, useEffect, useState } from "react";
+import { currentUser, getToken } from "./utilities.jsx";
 import "./App.css";
 
+export const UserContext = createContext(null);
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null);
+
+  getToken();
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      setUser(await currentUser());
+    };
+    getCurrentUser();
+  }, []);
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={flavoraLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={flavoraLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 }
