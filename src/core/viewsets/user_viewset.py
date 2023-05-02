@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.authtoken.models import Token
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from core.serializers import UserSerializer
@@ -24,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 last_name=request.data['last_name'])
 
             user.save()
-            
+
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'message': serializer.errors})
@@ -43,9 +44,9 @@ class UserViewSet(viewsets.ModelViewSet):
             user_data = serializer.data
             user_data['id'] = user.pk
 
-            print(serializer.data)
+            token, created = Token.objects.get_or_create(user=user)
 
-            return JsonResponse({'success': True, 'data': user_data})
+            return JsonResponse({'success': True, 'user': user_data, 'token': token.key})
         else:
             return JsonResponse({'success': False, 'message': 'Invalid credentials'})
 
@@ -65,4 +66,4 @@ class UserViewSet(viewsets.ModelViewSet):
             return JsonResponse({'success': False, 'message': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             serializer = UserSerializer(request.user)
-            return JsonResponse({'success': True, 'data': serializer.data})
+            return JsonResponse({'success': True, 'user': serializer.data})
