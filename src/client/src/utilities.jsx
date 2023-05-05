@@ -96,3 +96,22 @@ export const createAccount = async (
     return response.data;
   }
 };
+
+export const createRecipe = async (
+  ingredients,
+  food_preferences,
+  cooking_time,
+) => {
+  try {
+    const response = await axios.post("/api/recipes/", {
+      "ingredients": ingredients,
+      "food_preferences": food_preferences,
+      "cooking_time": cooking_time,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return response.data;
+  }
+};
