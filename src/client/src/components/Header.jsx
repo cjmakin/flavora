@@ -1,8 +1,7 @@
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { useContext } from "react";
 import { signOut } from "../utilities";
 import SignInPopup from "./SignInPopup";
 import CreateAccountPopup from "./CreateAccountPopup";
@@ -99,7 +98,13 @@ export function Header() {
             <>
               {/* User is signed in  */}
               <Nav className="secondary-font ms-auto navbar-links">
-                <Nav.Link style={{ paddingRight: "30px" }} href="#">
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/pantry/");
+                  }}
+                  style={{ paddingRight: "30px" }}
+                  href="#"
+                >
                   My Pantry
                 </Nav.Link>
                 <Nav.Link href="#">My Cookbook</Nav.Link>

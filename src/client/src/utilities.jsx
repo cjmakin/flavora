@@ -115,3 +115,16 @@ export const createRecipe = async (
     return response.data;
   }
 };
+
+export const addIngredients = async (ingredients) => {
+  try {
+    const response = await axios.post("/api/pantries/", {
+      "ingredient_ids": ingredients.map((ingredient) => ingredient.id),
+    });
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

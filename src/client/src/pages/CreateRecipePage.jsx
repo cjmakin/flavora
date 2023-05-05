@@ -40,8 +40,11 @@ export function CreateRecipePage() {
   ];
 
   const handleSubmit = async () => {
+    let selectedIngredientNames = selectedIngredients.map((ingredient) => {
+      return ingredient.name;
+    });
     let response = await createRecipe(
-      selectedIngredients,
+      selectedIngredientNames,
       selectedPreferences,
       cookingTime,
     );
@@ -60,6 +63,7 @@ export function CreateRecipePage() {
               <IngredientList
                 ingredients={pantry}
                 handleIngredientClick={setSelectedIngredients}
+                isChecked={true}
               />
             </Form.Group>
           </Col>

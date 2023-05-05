@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Accordion } from "react-bootstrap";
 
-export function IngredientList({ ingredients, handleIngredientClick }) {
+export function IngredientList({ ingredients, handleIngredientClick, isChecked }) {
   const [checkedItems, setCheckedItems] = useState(
-    ingredients.map((ingredient) => true),
+    ingredients.map((ingredient) => isChecked),
   );
 
   const handleItemCheck = (index) => {
@@ -27,10 +27,10 @@ export function IngredientList({ ingredients, handleIngredientClick }) {
                   if (e.target.checked) {
                     handleIngredientClick((
                       prev,
-                    ) => [...prev, ingredient.name]);
+                    ) => [...prev, ingredient]);
                   } else {
                     handleIngredientClick((prev) =>
-                      prev.filter((p) => p !== ingredient.name)
+                      prev.filter((p) => p !== ingredient)
                     );
                   }
                 }}

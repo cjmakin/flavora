@@ -7,10 +7,10 @@ from django.db.models import Q
 
 @api_view(['GET'])
 def search_ingredients(request):
-    query = request.data['query']
-    filters = request.data['filters'].split(',')
+    query = request.GET.get('query', '')
+    filters = request.GET.getlist('filters[]')
 
-    if filters == ['']:
+    if filters == []:
         results = Ingredient.objects.filter(
             Q(name__icontains=query) |
             Q(name_scientific__icontains=query)
@@ -25,7 +25,6 @@ def search_ingredients(request):
 
     results_count = results.count()
     serializer = IngredientSerializer(results, many=True)
-
     return JsonResponse({'success': True,
                          'data': {
                              'count': results_count,
