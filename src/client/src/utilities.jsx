@@ -128,3 +128,16 @@ export const addIngredients = async (ingredients) => {
     return false;
   }
 };
+
+export const removeIngredients = async (ingredients) => {
+  try {
+    const response = await axios.post("/api/pantries/remove_ingredient/", {
+      "ingredient_ids": ingredients.map((ingredient) => ingredient.id),
+    });
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

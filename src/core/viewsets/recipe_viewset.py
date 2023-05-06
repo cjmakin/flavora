@@ -5,9 +5,6 @@ from rest_framework.decorators import action
 from core.models import Recipe, UserRecipe, User
 from core.utilities import generate_recipe, generate_image, save_image
 
-#  A viewset that provides default `create()`, `retrieve()`, `update()`,
-# `partial_update()`, `destroy()` and `list()` actions.
-
 
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()

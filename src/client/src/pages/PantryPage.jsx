@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { IngredientList } from "../components/IngredientList";
-import { UserContext } from "../App";
-import { addIngredients } from "../utilities";
+import { addIngredients, removeIngredients } from "../utilities";
 
 const foodGroups = [
   "Animal foods",
@@ -43,23 +42,26 @@ const searchIngredients = async (query, filters) => {
 };
 
 export function PantryPage() {
-  const { user } = useContext(UserContext);
   const [pantry, setPantry] = useState(useLoaderData);
   const [searchValue, setSearchValue] = useState("");
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedSearchResults, setSelectedSearchResults] = useState([]);
-
   const [selectedIngredients, setSelectedIngredients] = useState([]);
 
-  const handleRemoveIngredients = () => {
-    console.log(selectedIngredients);
+  const handleRemoveIngredients = async () => {
+    let response = await removeIngredients(selectedIngredients);
+    if (response) {
+      setPantry(response.data.data);
+      setSelectedIngredients([]);
+    }
   };
 
   const handleAddIngredients = async () => {
     let response = await addIngredients(selectedSearchResults);
     if (response) {
       setPantry(response.data.data);
+      setSelectedSearchResults([]);
     }
   };
 

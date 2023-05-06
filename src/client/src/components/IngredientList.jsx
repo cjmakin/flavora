@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 
-export function IngredientList({ ingredients, handleIngredientClick, isChecked }) {
+export function IngredientList(
+  { ingredients, handleIngredientClick, isChecked },
+) {
   const [checkedItems, setCheckedItems] = useState(
     ingredients.map((ingredient) => isChecked),
   );
@@ -12,6 +14,10 @@ export function IngredientList({ ingredients, handleIngredientClick, isChecked }
     setCheckedItems(newCheckedItems);
   };
 
+  useEffect(() => {
+    setCheckedItems(ingredients.map((ingredient) => isChecked));
+  }, [ingredients]);
+
   return (
     <Accordion>
       {ingredients.map((ingredient, index) => {
@@ -21,7 +27,7 @@ export function IngredientList({ ingredients, handleIngredientClick, isChecked }
               <input
                 type="checkbox"
                 checked={checkedItems[index]}
-                style={{ marginRight: "10px" }}
+                // style={{ marginRight: "10px" }}
                 onChange={(e) => {
                   handleItemCheck(index);
                   if (e.target.checked) {
@@ -34,6 +40,7 @@ export function IngredientList({ ingredients, handleIngredientClick, isChecked }
                     );
                   }
                 }}
+                onClick={(e) => e.stopPropagation()}
               />
               {ingredient.name}
             </Accordion.Header>

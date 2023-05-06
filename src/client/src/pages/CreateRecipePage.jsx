@@ -69,7 +69,7 @@ export function CreateRecipePage() {
           </Col>
 
           {/* Food preferences checkboxes */}
-          <Col>
+          <Col style={{ marginLeft: "50px" }}>
             <Form.Group className="mb-3" controlId="restrictions">
               <Form.Label className="form-header">Preferences</Form.Label>
               {dietRestrictions.map((restriction, index) => {
