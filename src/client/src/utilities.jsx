@@ -15,6 +15,21 @@ export const getPantry = async () => {
   }
 };
 
+export const getCookbook = async () => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    const headers = { Authorization: `Token ${token}` };
+    try {
+      const response = await axios.get("/api/recipes/cookbook/");
+      console.log(response.data);
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+};
+
 export const getToken = () => {
   function getCookie(name) {
     let cookieValue = null;

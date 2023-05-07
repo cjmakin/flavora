@@ -103,11 +103,16 @@ export function Header() {
                     navigate("/pantry/");
                   }}
                   style={{ paddingRight: "30px" }}
-                  href="#"
                 >
                   My Pantry
                 </Nav.Link>
-                <Nav.Link href="#">My Cookbook</Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/cookbook/");
+                  }}
+                >
+                  My Cookbook
+                </Nav.Link>
               </Nav>
               <Button
                 onClick={handleCreateRecipeClick}

@@ -15,7 +15,8 @@ urlpatterns = [
     path('ingredients/', views.search_ingredients, name="ingredients")
 ]
 
-# ALL API CALLS:
+
+# ALL API ENDPOINTS:
 
 # USERS:
 #   POST api/users/sign_up/ - Create new account

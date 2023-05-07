@@ -27,7 +27,6 @@ export function IngredientList(
               <input
                 type="checkbox"
                 checked={checkedItems[index]}
-                // style={{ marginRight: "10px" }}
                 onChange={(e) => {
                   handleItemCheck(index);
                   if (e.target.checked) {
