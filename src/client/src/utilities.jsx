@@ -127,7 +127,34 @@ export const createRecipe = async (
     return response.data;
   } catch (error) {
     console.log(error);
+    return false;
+  }
+};
+
+export const saveRecipe = async (
+  name,
+  description,
+  ingredients,
+  food_preferences,
+  cooking_time,
+  img_url,
+  instructions,
+) => {
+  try {
+    const response = await axios.post("/api/recipes/save/", {
+      "name": name,
+      "description": description,
+      "ingredients": ingredients,
+      "food_preferences": food_preferences,
+      "cooking_time": cooking_time,
+      "img_url": img_url,
+      "instructions": instructions,
+    });
+    console.log(response.data);
     return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 };
 

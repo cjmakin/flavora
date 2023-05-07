@@ -6,6 +6,7 @@ import { HomePage } from "./pages/HomePage";
 import { CreateRecipePage } from "./pages/CreateRecipePage";
 import { CookbookPage } from "./pages/CookbookPage";
 import { PantryPage } from "./pages/PantryPage";
+import { RecipePage } from "./pages/RecipePage";
 import { getCookbook, getPantry } from "./utilities";
 import App from "./App";
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "cookbook/",
         element: <CookbookPage />,
         loader: getCookbook,
+      },
+      {
+        path: "recipes/",
+        element: <RecipePage />,
       },
     ],
   },

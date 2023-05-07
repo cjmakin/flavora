@@ -55,6 +55,7 @@ def generate_recipe(user_email, ingredients, cooking_time, food_preferences):
         print(e)
         return -1
 
+    print(response.choices[0].message.content + '\n')
     recipe = decompose_response(response.choices[0].message.content)
 
     return recipe

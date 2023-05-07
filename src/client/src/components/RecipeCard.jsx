@@ -1,11 +1,22 @@
-import { Card, Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { RecipeContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
-export function RecipeCard({ recipe }) {
-  const imagePath = recipe.img_path;
+export function RecipeCard(props) {
+  const navigate = useNavigate();
+  const { setRecipe } = useContext(RecipeContext);
+
+  const imagePath = props.recipe.img_path;
   const mediaPath = "/src";
   const index = imagePath.indexOf(mediaPath);
   const imagePathRelativeToMedia = imagePath.slice(index + mediaPath.length);
+
+  function handleViewRecipeClick() {
+    setRecipe(props.recipe);
+    navigate("/recipes/");
+  }
 
   return (
     <Card style={{ width: "18rem", marginTop: "30px" }}>
@@ -14,18 +25,13 @@ export function RecipeCard({ recipe }) {
         src={imagePathRelativeToMedia}
       />
       <Card.Body>
-        <Card.Title>{recipe.name}</Card.Title>
+        <Card.Title>{props.recipe.name}</Card.Title>
         <Card.Text>
-          {recipe.description}
+          {props.recipe.description}
         </Card.Text>
-        <Button className="button-primary">View Recipe</Button>
-        <Link
-          to={`/recipes/${recipe.id}`}
-          style={{ color: "#ffffff" }}
-          className="btn button-primary"
-        >
+        <Button onClick={handleViewRecipeClick} className="btn button-primary">
           View Recipe
-        </Link>
+        </Button>
       </Card.Body>
     </Card>
   );

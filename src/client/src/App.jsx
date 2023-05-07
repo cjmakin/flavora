@@ -6,8 +6,14 @@ import "./App.css";
 
 export const UserContext = createContext(null);
 
+export const RecipeContext = createContext({
+  recipe: {},
+  setRecipe: () => {},
+});
+
 function App() {
   const [user, setUser] = useState(null);
+  const [recipe, setRecipe] = useState({});
 
   getToken();
 
@@ -21,8 +27,10 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ user, setUser }}>
-        <Header />
-        <Outlet />
+        <RecipeContext.Provider value={{ recipe, setRecipe }}>
+          <Header />
+          <Outlet />
+        </RecipeContext.Provider>
       </UserContext.Provider>
     </div>
   );

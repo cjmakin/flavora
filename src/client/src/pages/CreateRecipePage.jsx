@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { IngredientList } from "../components/IngredientList";
-import { createRecipe } from "../utilities";
+import { createRecipe, saveRecipe } from "../utilities";
 
 export function CreateRecipePage() {
   let pantry = useLoaderData();
@@ -48,7 +48,23 @@ export function CreateRecipePage() {
       selectedPreferences,
       cookingTime,
     );
-    console.log("response");
+
+    if (!response.success) {
+      alert("Model Currently Overloaded! Please try again later.");
+    } else {
+      response = await saveRecipe(
+        response.data.name,
+        response.data.description,
+        response.data.ingredients,
+        response.data.food_preferences,
+        response.data.cooking_time,
+        response.data.img_url,
+        response.data.instructions,
+      );
+      if (response) {
+        alert("Recipe successfully saved!");
+      }
+    }
   };
 
   return (
