@@ -1,37 +1,42 @@
-# flavora
+# Flavora
 
-A django / react web app that allows users generate custom food recipes based on
-the their food preferences, ingredients, and cooking time.
-
-<!-- ![img](images/recipe_images/recipe_1_realistic_512_2.png) ![img](images/recipe_images/recipe_6_realistic_512.png){with=200} -->
+<p>Flavora is a web application developed using React, Django, and React Bootstrap. It is designed to allow users to manage their pantry, create recipes using the OpenAI API, and organize them in a cookbook.</p>
 
 <img src="images/recipe_images/8.jpg" width=30%><img src="images/recipe_images/6.jpg" width=30%><img src="images/recipe_images/7.jpg" width=30%>
 
-## Goals
+## Features
 
-- Build a web app that allows users to generate declicious and maybe
-  questionable new food recipes using OpenAI API.
-- Allow users to choose from a list of ingredients (900+) and save them to their
-  "pantry". All items in a user's pantry will be passed into the ChatGPT API
-  query, with the option to add additional items.
-- Allow users to save food preferences (e.g. vegitarian, pescatarian, vegan,
-  etc.) which will then be passed into the ChatGPT API query.
-- Allow user's to save all of their generated recipes into their own "Cookbook".
-- _Stretch_ Allow users to generate an image of what their recipe could look
-  like by passing the recipe description into the Dall-E API. The image will
-  then be saved into the their cookbook.
+- User Authentication: Users can create accounts, log in, and log out to access
+  personalized features and data.
+- Pantry: Users can add, remove, and view ingredients in their pantry.
+- Recipe Creation: Open AI API chat completion endpoint is used to allow users
+  to create new recipes by specifying ingredients, dietary restrictions, and
+  maximum cooking time. The Image Generation endpoint is used to create an image
+  of the recipe based on the recipe's description.
+- Cookbook: Recipes can be saved to a cookbook.
 
-## APIs
+## Technologies
 
-- OpenAI API (Generate recipes and _maybe_ images of said recipe)
-- fooddb API (All ingredient info will come from this API)
+- Django
+- Django REST Framework
+- React
+- React Bootstrap
+- React Router
+- Axios
+- PostgreSQL
 
-## Challenges / Considerations
+## Installation and Setup
 
-- Priming the language model (gpt-3.5-turbo or text-davinci-003) to get
-  compelling outputs and reduce token count.
-  - Fine tune the model.
-- Storing ingredients in either postgres or JSON file.
+1. Clone the repository: git clone https://github.com/cjmakin/flavora
+2. Install dependencies:
+   - Frontend: Navigate to the flavora/src/client directory and run npm install.
+   - Backend: Set up a virtual environment and install Python dependencies from
+     the requirements.txt file.
+3. Configure the database connection in the Django settings file.
+4. Run migrations: python manage.py migrate.
+5. Start the development server:
+   - Frontend: Run npm start in the flavora/src/client directory.
+   - Backend: Run python flavora/src/manage.py runserver.
 
 ## Database Schema
 
