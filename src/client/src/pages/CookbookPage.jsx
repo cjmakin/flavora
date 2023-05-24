@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { RecipeCard } from "../components/RecipeCard";
 
 export function CookbookPage() {
-  const [cookbook, setCookbook] = useState(useLoaderData);
+  const [cookbook] = useState(useLoaderData);
 
   return (
     <Container className="page-top-padding">
