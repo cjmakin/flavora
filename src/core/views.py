@@ -9,11 +9,17 @@ from django.db.models import Q
 def search_ingredients(request):
     query = request.GET.get('query', '')
     filters = request.GET.getlist('filters[]')
+    print(filters)
 
     if filters == []:
         results = Ingredient.objects.filter(
             Q(name__icontains=query) |
             Q(name_scientific__icontains=query)
+        )
+
+    elif len(filters) > 1 and query == '':
+        results = Ingredient.objects.filter(
+            food_group__in=filters
         )
 
     else:

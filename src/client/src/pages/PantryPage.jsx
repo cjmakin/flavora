@@ -44,6 +44,7 @@ const searchIngredients = async (query, filters) => {
 export function PantryPage() {
   const [pantry, setPantry] = useState(useLoaderData);
   const [searchValue, setSearchValue] = useState("");
+  const [searchCount, setSearchCount] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedSearchResults, setSelectedSearchResults] = useState([]);
@@ -67,12 +68,13 @@ export function PantryPage() {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    if (searchValue === "") {
+    if (searchValue === "" && selectedFilters.length === 0) {
       return;
     }
 
     let response = await searchIngredients(searchValue, selectedFilters);
     setSearchResults(response.data.results);
+    setSearchCount(response.data.count);
   };
 
   const handleChange = (event) => {
@@ -103,7 +105,7 @@ export function PantryPage() {
           style={{ paddingTop: "40px", paddingBottom: "30px" }}
           className="branding"
         >
-          Search Ingredients
+          Add Ingredients
         </h1>
         <Form onSubmit={handleSearch} className="d-flex">
           <Col md="auto">
@@ -139,35 +141,47 @@ export function PantryPage() {
 
           <Col style={{ paddingLeft: "50px" }}>
             <Form.Group className="mb-3">
-              <Form.Control
-                type="search"
-                placeholder="Search Ingredients"
-                className="me-2 search"
-                aria-label="Search"
-                onChange={handleChange}
-              />
-              <Form.Label
-                style={{ paddingTop: "30px", paddingBotttom: "30px" }}
-                className="form-header"
-              >
-                Results:
-              </Form.Label>
-              {searchResults.length > 0
+              <Row>
+                <Form.Control
+                  type="search"
+                  placeholder="Search Ingredients"
+                  className="me-2 search"
+                  aria-label="Search"
+                  onChange={handleChange}
+                />
+                <Button className="button-primary" type="submit">
+                  Search
+                </Button>
+              </Row>
+              {searchCount > 0
                 ? (
-                  <IngredientList
-                    ingredients={searchResults}
-                    handleIngredientClick={setSelectedSearchResults}
-                    isChecked={false}
-                  />
+                  <>
+                    <Form.Label
+                      style={{ paddingTop: "30px", paddingBotttom: "30px" }}
+                      className="form-header"
+                    >
+                      {searchCount} Result(s):
+                    </Form.Label>
+                    <IngredientList
+                      ingredients={searchResults}
+                      handleIngredientClick={setSelectedSearchResults}
+                      isChecked={false}
+                    />
+
+                    <Button
+                      style={{ marginTop: "30px" }}
+                      onClick={handleAddIngredients}
+                      className="button-primary"
+                    >
+                      Add Selected
+                    </Button>
+                  </>
                 )
-                : <p>No results found</p>}
-              <Button
-                style={{ marginTop: "30px" }}
-                onClick={handleAddIngredients}
-                className="button-primary"
-              >
-                Add Selected
-              </Button>
+                : (
+                  <h4 style={{ paddingTop: "30px" }}>
+                    No results found
+                  </h4>
+                )}
             </Form.Group>
           </Col>
         </Form>

@@ -149,7 +149,6 @@ export const saveRecipe = async (
       "img_url": img_url,
       "instructions": instructions,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

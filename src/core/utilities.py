@@ -34,10 +34,10 @@ def decompose_response(response):
 
 
 def generate_recipe(user_email, ingredients, cooking_time, food_preferences):
+    ingredients = [ingredient for ingredient in ingredients if ingredient]
     hashed_email = hashlib.sha256(user_email.encode('utf-8')).hexdigest()
     cooking_time = '5 hours' if cooking_time == '' else cooking_time
     food_preferences = '(No preference)' if food_preferences == '' else food_preferences
-
     print(f'Attempting to generate recipe for {user_email}')
 
     try:
