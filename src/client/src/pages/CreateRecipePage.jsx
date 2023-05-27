@@ -9,6 +9,7 @@ export function CreateRecipePage() {
   let pantry = useLoaderData();
 
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("Creating Recipe...");
   const [selectedIngredients, setSelectedIngredients] = useState([
     ...pantry,
   ]);
@@ -54,6 +55,7 @@ export function CreateRecipePage() {
       setLoading(false);
       alert("Model Currently Overloaded! Please try again later.");
     } else {
+      setLoadingText("Saving Recipe...");
       response = await saveRecipe(
         response.data.name,
         response.data.description,
@@ -152,15 +154,27 @@ export function CreateRecipePage() {
           </Container>
         )
         : (
-          <Container className="spinner">
-            <ClockLoader
-              color={"#258E00"}
-              loading={loading}
-              size={200}
-              className="pulse"
-            >
-            </ClockLoader>
-          </Container>
+          <>
+            <Container style={{ paddingTop: "200px" }}>
+              <h1
+                style={{
+                  textAlign: "center",
+                }}
+                className="branding fade-in"
+              >
+                {loadingText}
+              </h1>
+            </Container>
+            <Container className="spinner">
+              <ClockLoader
+                color={"#258E00"}
+                loading={loading}
+                size={150}
+                className="pulse"
+              >
+              </ClockLoader>
+            </Container>
+          </>
         )}
     </>
   );
