@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { IngredientList } from "../components/IngredientList";
+import { RecipeContext } from "../App";
 import { createRecipe, saveRecipe } from "../utilities";
 import { ClockLoader } from "react-spinners";
 
 export function CreateRecipePage() {
   let pantry = useLoaderData();
 
+  const navigate = useNavigate();
+  const { setRecipe } = useContext(RecipeContext);
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Creating Recipe...");
   const [selectedIngredients, setSelectedIngredients] = useState([
@@ -66,8 +69,9 @@ export function CreateRecipePage() {
         response.data.instructions,
       );
       if (response) {
+        setRecipe(response.data);
+        navigate("/recipes/");
         setLoading(false);
-        alert("Recipe successfully saved!");
       }
     }
   };
@@ -154,6 +158,7 @@ export function CreateRecipePage() {
           </Container>
         )
         : (
+          // Loading screen
           <>
             <Container style={{ paddingTop: "200px" }}>
               <h1
