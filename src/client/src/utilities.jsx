@@ -181,3 +181,17 @@ export const removeIngredients = async (ingredients) => {
     return false;
   }
 };
+
+export const removeRecipe = async (recipe) => {
+  try {
+    console.log(recipe);
+    const response = await axios.post("/api/recipes/remove_recipe/", {
+      "recipe_id": recipe.id,
+    });
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

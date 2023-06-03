@@ -4,7 +4,8 @@ import { useLoaderData } from "react-router-dom";
 import { RecipeCard } from "../components/RecipeCard";
 
 export function CookbookPage() {
-  const [cookbook] = useState(useLoaderData);
+  // Set cookbook context to try and pass state or maintain state to the RecipeCard component
+  const [cookbook, setCookbook] = useState(useLoaderData);
 
   return (
     <Container className="page-top-padding">
@@ -14,7 +15,11 @@ export function CookbookPage() {
         {cookbook.map((recipe) => {
           return (
             <Col>
-              <RecipeCard recipe={recipe} />
+              <RecipeCard
+                recipe={recipe}
+                setCookbook={setCookbook}
+                cookbook={cookbook}
+              />
             </Col>
           );
         })}

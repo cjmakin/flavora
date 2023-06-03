@@ -1,5 +1,19 @@
 /* PRIMARY COLOR 258E00 */
 
+.recipe-card {
+    width: 18rem;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
 .page-top-padding {
     padding-top: 100px;
 }
@@ -84,7 +98,6 @@
     font-size: 1.5em;
     font-weight: semi-bold !important;
 }
-
 
 .navbar-links {
     padding-right: 50px;

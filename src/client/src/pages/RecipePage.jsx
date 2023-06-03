@@ -17,9 +17,6 @@ export function RecipePage() {
   );
 
   const ingredients = recipe.ingredients.split("\\n");
-  console.log(instructions);
-
-  console.log(ingredients);
 
   return (
     <Container className="page-top-padding">
