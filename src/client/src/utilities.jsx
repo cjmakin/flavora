@@ -117,10 +117,23 @@ export const createRecipe = async (
   cooking_time,
 ) => {
   try {
-    const response = await axios.post("/api/recipes/", {
+    const response = await axios.post("/api/recipes/create_recipe/", {
       "ingredients": ingredients,
       "food_preferences": food_preferences,
       "cooking_time": cooking_time,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const createImage = async (recipe_description) => {
+  try {
+    const response = await axios.post("/api/recipes/create_image/", {
+      "recipe_description": recipe_description,
     });
     console.log(response.data);
     return response.data;

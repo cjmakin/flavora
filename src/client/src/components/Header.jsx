@@ -10,8 +10,8 @@ import logo from "../assets/logo.svg";
 export function Header() {
   const [showSignInPopup, setShowSignInPopup] = useState(false);
   const [showCreateAccountPopup, setShowCreateAccountPopup] = useState(false);
-  const { user } = useContext(UserContext);
-  const { setUser } = useContext(UserContext);
+
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleCreateRecipeClick = () => {

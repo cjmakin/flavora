@@ -100,7 +100,7 @@ export function PantryPage() {
         </Button>
       </Row>
 
-      <Row className="container-border" style={{ marginTop: "50px" }}>
+      <Row className="container-border-top" style={{ marginTop: "50px" }}>
         <h1
           style={{ paddingTop: "40px", paddingBottom: "30px" }}
           className="branding"

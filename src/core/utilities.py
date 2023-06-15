@@ -11,51 +11,59 @@ load_dotenv()
 openai.api_key = os.environ['_OPENAI_API_KEY']
 BASE_DIR = Path().resolve()
 
-prompt = """
-Generate a recipe for a dish that contains {}.
-It should be {} and take no longer than {} to cook.
-Recipe name: [Recipe Name]
-Description: [Description]
-Instructions: [Instructions]
-Ingredients: [Ingredients]
-Cooking time: [Cooking time]"""
+system_prompt = """You are an expert chef. You will be given a list of ingredients, a desired maximum cooking time, and dietary preferences.
+                You will then generate a recipe for a dish that contains those ingredients, is within the cooking time, and meets the dietary preferences.
+                You will output a string with the following information exactly in this order: name, description, instructions, ingredients, cooking_time. 
+                Each piece of information will be separated by $$$.
+                The instructions and ingredients will be newline-separated strings.
+                Assume the user has basic cooking knowledge. Be very specific with the instructions.
+                """
+# Basic Example Output: Chicken Parmesan$$$A delicious Italian dish.$$$Cook the chicken\nAdd the sauce.\nAdd the cheese.\nCook for 30 minutes.$$$1 Chicken\n1/2 cup sauce\n1 block of cheese$$$30 minutes
+
+user_prompt = """
+Ingredients: {}
+Dietary preferences: {}
+Maximum cooking time: {}"""
 
 
 def decompose_response(response):
-    response_arr = response.strip().split(":")
+    response_arr = response.strip().split("$$$")
     response_dict = {
-        'name': response_arr[1].rstrip('\nDescription').lstrip(),
-        'description': response_arr[2].rstrip('\nInstructions').lstrip(),
-        'instructions': response_arr[3].rstrip('\nIngredients').lstrip(),
-        'ingredients': response_arr[4].rstrip('\nCooking time').lstrip(),
-        'cooking_time': response_arr[5].strip()
+        'name': response_arr[0].strip(),
+        'description': response_arr[1].strip(),
+        'instructions': response_arr[2].strip(),
+        'ingredients': response_arr[3].strip(),
+        'cooking_time': response_arr[4].strip()
     }
+    print(response_dict)
     return response_dict
 
 
 def generate_recipe(user_email, ingredients, cooking_time, food_preferences):
-    ingredients = [ingredient for ingredient in ingredients if ingredient]
     hashed_email = hashlib.sha256(user_email.encode('utf-8')).hexdigest()
+
+    ingredients = [ingredient for ingredient in ingredients if ingredient]
     cooking_time = '5 hours' if cooking_time == '' else cooking_time
-    food_preferences = '(No preference)' if food_preferences == '' else food_preferences
+    food_preferences = 'None' if food_preferences == '' else food_preferences
+
     print(f'Attempting to generate recipe for {user_email}')
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt.format(
-                ingredients, food_preferences, cooking_time)}],
-            max_tokens=1024,
+            model="gpt-3.5-turbo-0613",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt.format(
+                    ingredients, food_preferences, cooking_time)}
+            ],
             n=1,
-            stop=None,
-            temperature=0.5,
+            temperature=1,
             user=hashed_email,
         )
     except Exception as e:
         print(e)
         return -1
 
-    print(response.choices[0].message.content + '\n')
     recipe = decompose_response(response.choices[0].message.content)
 
     return recipe
@@ -67,7 +75,7 @@ def generate_image(recipe_description, email):
     print(f'Attempting to generate image for {email}')
 
     # Request arguments
-    prompt = f'image, no text, of: {recipe_description}'
+    prompt = f'Create an image with no text of: {recipe_description}'
     size = '512x512'
     n = 1
     response_format = 'url'

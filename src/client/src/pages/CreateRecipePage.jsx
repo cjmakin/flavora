@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { IngredientList } from "../components/IngredientList";
 import { RecipeContext } from "../App";
-import { createRecipe, saveRecipe } from "../utilities";
+import { createImage, createRecipe, saveRecipe } from "../utilities";
 import { ClockLoader } from "react-spinners";
 
 export function CreateRecipePage() {
@@ -54,24 +54,44 @@ export function CreateRecipePage() {
       cookingTime,
     );
 
+    let recipeDict = {
+      "name": response.data.name,
+      "description": response.data.description,
+      "ingredients": response.data.ingredients,
+      "food_preferences": response.data.food_preferences,
+      "cooking_time": response.data.cooking_time,
+      "instructions": response.data.instructions,
+    };
+
     if (!response.success) {
       setLoading(false);
       alert("Model Currently Overloaded! Please try again later.");
     } else {
-      setLoadingText("Saving Recipe...");
-      response = await saveRecipe(
-        response.data.name,
-        response.data.description,
-        response.data.ingredients,
-        response.data.food_preferences,
-        response.data.cooking_time,
-        response.data.img_url,
-        response.data.instructions,
-      );
-      if (response) {
-        setRecipe(response.data);
-        navigate("/recipes/");
+      // Create image
+      setLoadingText("Creating Image...");
+      response = await createImage(response.data.description);
+      if (!response.success) {
         setLoading(false);
+        alert("Model Currently Overloaded! Please try again later.");
+      } else {
+        // Save recipe
+        recipeDict["img_url"] = response.data.img_url;
+        setLoadingText("Saving Recipe...");
+        response = await saveRecipe(
+          recipeDict.name,
+          recipeDict.description,
+          recipeDict.ingredients,
+          recipeDict.food_preferences,
+          recipeDict.cooking_time,
+          recipeDict.img_url,
+          recipeDict.instructions,
+        );
+
+        if (response) {
+          setRecipe(response.data);
+          navigate("/recipes/");
+          setLoading(false);
+        }
       }
     }
   };

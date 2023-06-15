@@ -1,5 +1,12 @@
 /* PRIMARY COLOR 258E00 */
 
+.timer-icon {
+    max-width: 25px;
+    height: auto;
+    margin-right: 10px;
+
+}
+
 .recipe-card {
     width: 18rem;
     height: 100%;
@@ -8,6 +15,18 @@
     margin-bottom: 20px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.recipe-description {
+    width: 522px;
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .recipe-card:hover {
@@ -30,6 +49,17 @@
     font-size: 2.2em;
     font-weight: semi-bold;
     font-family: 'Fraunces';
+}
+
+.recipe-name {
+    font-family: 'Poppins';
+    font-size: 2.5em;
+    font-weight: semi-bold;
+}
+
+.user-name {
+    font-size: 1.5em;
+    font-weight: semi-bold;
 }
 
 .form-header {
@@ -117,9 +147,16 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.container-border {
+
+.container-border-top {
     border-top-width: 1px;
     border-top-style: solid;
+}
+
+.container-border-bottom {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-bottom: 10px;
 }
 
 input[type="checkbox"] {

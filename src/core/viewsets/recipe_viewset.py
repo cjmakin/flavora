@@ -18,7 +18,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
-    def create(self, request):
+    @action(detail=False, methods=['POST'])
+    def create_recipe(self, request):
 
         if not request.user.is_authenticated:
             return JsonResponse({'success': False, 'message': 'User not authenticated.'})
@@ -34,22 +35,30 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if recipe == -1:
             return JsonResponse({'success': False, 'message': 'Recipe creation failed. Please try again later.'})
 
-        img_url = generate_image(recipe['description'], user_email)
+        return JsonResponse({'success': True, 'data': recipe})
+
+    @action(detail=False, methods=['POST'])
+    def create_image(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse({'success': False, 'message': 'User not authenticated.'})
+
+        user_email = request.user.email
+        recipe_description = request.data['recipe_description']
+
+        img_url = generate_image(recipe_description, user_email)
 
         if img_url == -1:
             return JsonResponse({'success': False, 'message': 'Image creation failed. Please try again later.'})
 
-        recipe['img_url'] = img_url
-
-        return JsonResponse({'success': True, 'data': recipe})
+        return JsonResponse({'success': True, 'data': {'img_url': img_url}})
 
     @action(detail=False, methods=['POST'])
     def save(self, request):
         if not request.user.is_authenticated:
             return JsonResponse({'success': False, 'message': 'User not authenticated.'})
 
+        print(request.data)
         user = request.user
-
         name = request.data['name']
         description = request.data['description']
         instructions = request.data['instructions']
