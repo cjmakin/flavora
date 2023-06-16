@@ -50,12 +50,8 @@ example_response = "Spicy Grilled Shrimp Skewer$$$These grilled shrimp skewers a
 
 
 def decompose_response(response):
-    print(response)
-    print()
-
     response_arr = response.strip().split("$$$")
-    print(response_arr)
-    print()
+
     response_dict = {
         'name': response_arr[0].strip(),
         'description': response_arr[1].strip(),
@@ -75,15 +71,6 @@ def generate_recipe(user_email, ingredients, cooking_time, food_preferences):
     food_preferences = 'None' if food_preferences == [] else food_preferences
 
     print(f'Attempting to generate recipe for {user_email}')
-    print('\n\n')
-    print(system_prompt)
-    print()
-    print(example_prompt)
-    print()
-    print(example_response)
-    print()
-    print(user_prompt.format(ingredients, food_preferences, cooking_time))
-    print('\n\n')
 
     try:
         response = openai.ChatCompletion.create(
