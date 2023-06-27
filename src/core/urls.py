@@ -15,8 +15,8 @@ from core import views
 
 # PANTRIES:
 #   POST api/pantries/ - Create new pantry
-#   GET api/pantries/ - Get user's pantry
 #   POST api/pantries/remove_ingredient/ - Remove ingredient from user's pantry
+#   GET api/pantries/ - Get user's pantry
 
 # RECIPES:
 #   POST api/recipes/create_recipe/ - Create new recipe
@@ -25,7 +25,7 @@ from core import views
 #   POST api/recipes/remove_recipe/ - Remove recipe from user's cookbook
 #   GET api/recipes/cookbook/ - Get user's cookbook
 #   GET api/recipes/ - Get all recipes
-#   GET api/recipes/{user_id}/ - Get recipes by user id
+#   GET api/recipes/{recipe_id}/ - Get recipe by recipe id
 
 # INGREDIENTS:
 #   GET api/ingredients/ - Search for ingredients by name

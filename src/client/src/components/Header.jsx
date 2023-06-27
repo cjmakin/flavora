@@ -55,6 +55,7 @@ export function Header() {
         </Navbar.Brand>
         <Form className="d-flex">
           <Form.Control
+            id="search"
             type="search"
             placeholder="Search Recipes"
             className="me-2 search"
@@ -104,14 +105,14 @@ export function Header() {
                   }}
                   style={{ paddingRight: "30px" }}
                 >
-                  My Pantry
+                  Pantry
                 </Nav.Link>
                 <Nav.Link
                   onClick={() => {
                     navigate("/cookbook/");
                   }}
                 >
-                  My Cookbook
+                  Cookbook
                 </Nav.Link>
               </Nav>
               <Button

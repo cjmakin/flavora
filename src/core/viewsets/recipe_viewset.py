@@ -57,7 +57,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if not request.user.is_authenticated:
             return JsonResponse({'success': False, 'message': 'User not authenticated.'})
 
-        print(request.data)
         user = request.user
         name = request.data['name']
         description = request.data['description']

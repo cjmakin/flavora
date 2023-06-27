@@ -1,20 +1,20 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
-import { useContext } from "react";
+import { useLoaderData } from "react-router-dom";
+import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { RecipeContext } from "../App";
 import timer_icon from "../assets/timer_icon.png";
 
 // TODO:
 // 1. Add a button to the recipe page that allows the user to add the recipe to their cookbook
 // 2. Add a cooking time icon
 // 3. Add a divider between the image and recipe name and the instructions
-// 4. Make the description the same width as the Image
+// 4. Make the description the same width as the Image
 // 5. Center the Recipe name and user name in the column
 // 6. Fix formatting on the Instructions and Ingredient lists
 
 export function RecipePage() {
-  const { recipe } = useContext(RecipeContext);
   const { user } = useContext(UserContext);
+  const [recipe] = useState(useLoaderData);
 
   const imagePath = recipe.img_path;
   const mediaPath = "/src";
@@ -31,9 +31,6 @@ export function RecipePage() {
 
   const ingredients = recipe.ingredients.split("\n");
 
-  console.log(recipe.instructions);
-  console.log(instructions);
-
   return (
     <Container className="page-top-padding">
       <Row className="container-border-bottom">
@@ -41,7 +38,7 @@ export function RecipePage() {
           className="align-items-center justify-content-center"
           style={{ position: "relative" }}
         >
-          <div className="recipe-name">{recipe.name}</div>
+          <div className="recipe-page-name">{recipe.name}</div>
           <div>By: {userName}</div>
 
           <div style={{ display: "inline" }}>
@@ -58,27 +55,36 @@ export function RecipePage() {
         <Col>
           <Image
             thumbnail
-            classname="recipe-image"
+            classname="recipe-page-image"
             src={imagePathRelativeToMedia}
           />
-          <div className="recipe-description">{recipe.description}</div>
+          <div className="recipe-page-description">{recipe.description}</div>
         </Col>
       </Row>
 
       <Row style={{ paddingTop: "20px" }}>
         <Col>
-          <h2>Instructions</h2>
+          <div className="recipe-page-instructions-header">Instructions</div>
           {instructions.map((instruction, index) => (
-            <div style={{ paddingBottom: "10px" }} key={index}>
-              {instruction}
-            </div>
+            <>
+              <div className="recipe-page-instruction-steps" key={index}>
+                Step {index + 1}
+              </div>
+              <div className="recipe-page-instructions" key={index}>
+                {instruction}
+              </div>
+            </>
           ))}
         </Col>
         <Col>
-          <h2>Ingredients</h2>
+          <div className="recipe-page-ingredients-header">Ingredients</div>
           {ingredients.map((ingredient, index) => (
             <>
-              <div style={{ paddingBottom: "10px" }} key={index}>
+              <div
+                className="recipe-page-ingredients"
+                style={{ paddingBottom: "10px" }}
+                key={index}
+              >
                 {ingredient}
               </div>
             </>

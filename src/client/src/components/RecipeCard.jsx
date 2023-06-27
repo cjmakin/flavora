@@ -1,12 +1,9 @@
 import { Button, Card } from "react-bootstrap";
-import { useContext } from "react";
-import { RecipeContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { removeRecipe } from "../utilities.jsx";
 
 export function RecipeCard(props) {
   const navigate = useNavigate();
-  const { setRecipe } = useContext(RecipeContext);
 
   const imagePath = props.recipe.img_path;
   const mediaPath = "/src";
@@ -14,8 +11,7 @@ export function RecipeCard(props) {
   const imagePathRelativeToMedia = imagePath.slice(index + mediaPath.length);
 
   function handleRecipeClick() {
-    setRecipe(props.recipe);
-    navigate("/recipes/");
+    navigate("/recipes/" + props.recipe.id + "/");
   }
 
   function handleRemoveRecipe(event) {

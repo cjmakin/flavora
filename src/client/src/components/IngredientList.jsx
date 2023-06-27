@@ -25,6 +25,7 @@ export function IngredientList(
           <Accordion.Item eventKey={index} key={index}>
             <Accordion.Header>
               <input
+                name={ingredient.name}
                 type="checkbox"
                 checked={checkedItems[index]}
                 onChange={(e) => {

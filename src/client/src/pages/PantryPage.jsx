@@ -113,12 +113,15 @@ export function PantryPage() {
             <Form.Group
               style={{ width: "400px" }}
               className="mb-3"
-              controlId="foodGroups"
+              //   controlId="foodGroups"
             >
-              <Form.Label className="form-header">Filters</Form.Label>
+              <Form.Label className="form-header">
+                Filters
+              </Form.Label>
               {foodGroups.map((foodGroup, index) => {
                 return (
                   <Form.Check
+                    id={foodGroup}
                     type="checkbox"
                     label={foodGroup}
                     key={index}
@@ -143,6 +146,7 @@ export function PantryPage() {
             <Form.Group className="mb-3">
               <Row>
                 <Form.Control
+                  id="search"
                   type="search"
                   placeholder="Search Ingredients"
                   className="me-2 search"

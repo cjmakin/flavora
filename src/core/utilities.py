@@ -59,7 +59,6 @@ def decompose_response(response):
         'ingredients': response_arr[3].strip(),
         'cooking_time': response_arr[4].strip()
     }
-    print(response_dict)
     return response_dict
 
 

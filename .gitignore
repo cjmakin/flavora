@@ -1,5 +1,3 @@
-node_modules
-
 # Output directory
 dist
 
@@ -15,16 +13,21 @@ dist
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# General
-.DS_Store
-
-
 # Django #
-*.log
 *.pot
 *.pyc
 __pycache__
 
 # Environments 
 .env 
-.venv 
+.venv
+
+# react 
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components

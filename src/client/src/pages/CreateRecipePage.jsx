@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLoaderData, useNavigate } from "react-router-dom";
 import { IngredientList } from "../components/IngredientList";
-import { RecipeContext } from "../App";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { createImage, createRecipe, saveRecipe } from "../utilities";
 import { ClockLoader } from "react-spinners";
 
@@ -10,7 +9,6 @@ export function CreateRecipePage() {
   let pantry = useLoaderData();
 
   const navigate = useNavigate();
-  const { setRecipe } = useContext(RecipeContext);
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Creating Recipe...");
   const [selectedIngredients, setSelectedIngredients] = useState([
@@ -88,8 +86,7 @@ export function CreateRecipePage() {
         );
 
         if (response) {
-          setRecipe(response.data);
-          navigate("/recipes/");
+          navigate("/recipes/" + response.data.id + "/");
           setLoading(false);
         }
       }
@@ -106,8 +103,13 @@ export function CreateRecipePage() {
               <Row style={{ paddingTop: "20px" }}>
                 {/* Ingredient checkboxes */}
                 <Col style={{ paddingRight: "30px" }}>
-                  <Form.Group className="mb-3" controlId="ingredients">
-                    <Form.Label className="form-header">Ingredients</Form.Label>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="ingredients"
+                  >
+                    <Form.Label className="form-header">
+                      Ingredients
+                    </Form.Label>
                     <IngredientList
                       ingredients={pantry}
                       handleIngredientClick={setSelectedIngredients}
