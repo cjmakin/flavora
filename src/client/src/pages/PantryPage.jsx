@@ -43,7 +43,7 @@ const searchIngredients = async (query, filters) => {
 
 export function PantryPage() {
   const [pantry, setPantry] = useState(useLoaderData);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchCount, setSearchCount] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -68,17 +68,17 @@ export function PantryPage() {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    if (searchValue === "" && selectedFilters.length === 0) {
+    if (searchQuery === "" && selectedFilters.length === 0) {
       return;
     }
 
-    let response = await searchIngredients(searchValue, selectedFilters);
+    let response = await searchIngredients(searchQuery, selectedFilters);
     setSearchResults(response.data.results);
     setSearchCount(response.data.count);
   };
 
   const handleChange = (event) => {
-    setSearchValue(event.target.value);
+    setSearchQuery(event.target.value);
   };
 
   return (
@@ -113,7 +113,6 @@ export function PantryPage() {
             <Form.Group
               style={{ width: "400px" }}
               className="mb-3"
-              //   controlId="foodGroups"
             >
               <Form.Label className="form-header">
                 Filters

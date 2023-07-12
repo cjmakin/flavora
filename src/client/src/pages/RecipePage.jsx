@@ -13,15 +13,12 @@ import timer_icon from "../assets/timer_icon.png";
 // 6. Fix formatting on the Instructions and Ingredient lists
 
 export function RecipePage() {
-  const { user } = useContext(UserContext);
   const [recipe] = useState(useLoaderData);
 
   const imagePath = recipe.img_path;
   const mediaPath = "/src";
   const index = imagePath.indexOf(mediaPath);
   const imagePathRelativeToMedia = imagePath.slice(index + mediaPath.length);
-
-  const userName = user ? user.first_name + " " + user.last_name : "Guest";
 
   const instructions = recipe.instructions.split("\n").filter(
     (instruction) => {
@@ -39,7 +36,6 @@ export function RecipePage() {
           style={{ position: "relative" }}
         >
           <div className="recipe-page-name">{recipe.name}</div>
-          <div>By: {userName}</div>
 
           <div style={{ display: "inline" }}>
             <div style={{ position: "absolute", bottom: "0" }}>

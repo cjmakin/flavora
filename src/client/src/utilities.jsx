@@ -213,3 +213,17 @@ export const saveRecipe = async (
     return false;
   }
 };
+
+export const searchRecipes = async (query) => {
+  try {
+    const response = await axios.get("/api/recipes/search/", {
+      "params": {
+        "query": query,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

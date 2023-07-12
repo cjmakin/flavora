@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from rest_framework import viewsets
+from django.db.models import Q
 from core.serializers import RecipeSerializer
 from rest_framework.decorators import action
 from core.models import Recipe, UserRecipe, User
@@ -17,6 +18,25 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
+
+    @action(detail=False, methods=['GET'])
+    def search(self, request):
+        query = request.GET.get('query', '')
+        print(query)
+
+        results = Recipe.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query))
+
+        results_count = results.count()
+        serializer = RecipeSerializer(results, many=True)
+        print(results_count)
+        print(serializer.data)
+        return JsonResponse({'success': True,
+                             'data': {
+                                 'count': results_count,
+                                 'results': serializer.data
+                             }})
 
     @action(detail=False, methods=['POST'])
     def create_recipe(self, request):

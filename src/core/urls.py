@@ -26,6 +26,7 @@ from core import views
 #   GET api/recipes/cookbook/ - Get user's cookbook
 #   GET api/recipes/ - Get all recipes
 #   GET api/recipes/{recipe_id}/ - Get recipe by recipe id
+#   GET api/recipes/search/ - Search for recipes by name
 
 # INGREDIENTS:
 #   GET api/ingredients/ - Search for ingredients by name

@@ -9,7 +9,6 @@ from django.db.models import Q
 def search_ingredients(request):
     query = request.GET.get('query', '')
     filters = request.GET.getlist('filters[]')
-    print(filters)
 
     if filters == []:
         results = Ingredient.objects.filter(

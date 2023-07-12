@@ -7,7 +7,8 @@ import { CreateRecipePage } from "./pages/CreateRecipePage";
 import { CookbookPage } from "./pages/CookbookPage";
 import { PantryPage } from "./pages/PantryPage";
 import { RecipePage } from "./pages/RecipePage";
-import { getCookbook, getPantry, getRecipe } from "./utilities";
+import { SearchPage } from "./pages/SearchPage";
+import { getCookbook, getPantry, getRecipe, searchRecipes } from "./utilities";
 import App from "./App";
 
 const router = createBrowserRouter([
@@ -39,6 +40,13 @@ const router = createBrowserRouter([
         element: <RecipePage />,
         loader: ({ params }) => {
           return getRecipe(params.recipe_id);
+        },
+      },
+      {
+        path: "search/:search_query/",
+        element: <SearchPage />,
+        loader: ({ params }) => {
+          return searchRecipes(params.search_query);
         },
       },
     ],
