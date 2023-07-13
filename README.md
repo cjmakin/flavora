@@ -1,8 +1,9 @@
 # Flavora
 
-<p>Flavora is a web application developed using React, Django, and React Bootstrap. It is designed to allow users to manage their pantry, create recipes using the OpenAI API, and organize them in a cookbook.</p>
+<p>Flavora allows users to manage a pantry of food items, create new recipes with ingredients from their pantry using the OpenAI API (model gpt-3.5-turbo-0613), and organize recipes in a cookbook.</p>
 
-<img src="images/recipe_images/8.jpg" width=30%><img src="images/recipe_images/6.jpg" width=30%><img src="images/recipe_images/7.jpg" width=30%>
+https://github.com/cjmakin/flavora/assets/72825344/b260b250-6257-4c90-8cbc-d15a96b50ce6
+
 
 ## Features
 
