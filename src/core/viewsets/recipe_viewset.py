@@ -30,8 +30,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         results_count = results.count()
         serializer = RecipeSerializer(results, many=True)
-        print(results_count)
-        print(serializer.data)
         return JsonResponse({'success': True,
                              'data': {
                                  'count': results_count,
