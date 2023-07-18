@@ -1,6 +1,6 @@
 # Flavora
 
-<p>Flavora allows users to manage a pantry of food items, create new recipes with ingredients from their pantry using the OpenAI API (gpt-3.5-turbo-0613), and organize recipes in a cookbook.</p>
+<p>Flavora allows users to manage a pantry of food items and create new recipes with ingredients from their pantry using OpenAI API (gpt-3.5-turbo-0613).</p>
 
 https://github.com/cjmakin/flavora/assets/72825344/b260b250-6257-4c90-8cbc-d15a96b50ce6
 
